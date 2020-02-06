@@ -27,7 +27,7 @@ import modeling
 import optimization
 import tokenization
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 flags = tf.flags
 
@@ -261,7 +261,7 @@ def read_squad_examples(input_file, is_training):
         is_impossible = False
         if is_training:
 
-          if FLAGS.version_2_with_negative:
+          if True:#FLAGS.version_2_with_negative:
             is_impossible = qa["is_impossible"]
           if (len(qa["answers"]) != 1) and (not is_impossible):
             raise ValueError(
@@ -1124,7 +1124,7 @@ def validate_flags_or_throw(bert_config):
 
 
 def main(_):
-  tf.logging.set_verbosity(tf.logging.INFO)
+  tf.logging.set_verbosity(tf.logging.WARNING)
 
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
